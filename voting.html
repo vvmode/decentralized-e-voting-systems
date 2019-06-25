@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+ <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+  <link href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet'>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  
+   
+   
+
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="combo.css">
+    <link rel="stylesheet" type="text/css" href="table.css">
+    <script src="node_modules/web3/dist/web3.min.js"></script>
+<style>
+body {
+    background-color:#F0F0F0;
+    padding: 2em;
+    font-family: 'Raleway','Source Sans Pro', 'Arial';
+    
+}
+
+.container {
+    width: 50%;
+    margin: 0 auto;
+     border: 1px solid black;
+}
+label {
+    font-family: 'Arial';font-size: 12px;
+  
+color: red;
+ 
+  
+
+}
+input {
+    padding:10px;
+    width: 50%;
+    margin-bottom: 1em;
+}
+
+.center {
+  text-align: center;
+ 
+}
+
+.button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+
+}
+
+.buttonLogout {
+ 
+  
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+    font-family: 'Arial';font-size: 10px;
+    border-radius: 2px;
+   
+}
+
+.button1 {border-radius: 2px;}
+.button2 {border-radius: 4px;}
+.button3 {border-radius: 8px;}
+.button4 {border-radius: 12px;}
+.button5 {border-radius: 50%;}
+
+
+
+input[type=text], select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=submit] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+h3{font-family: 'Righteous';font-size: 25px;
+}
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color:#E0F4DF;
+  }
+
+.custom-select {
+  position: relative;
+  font-family: Arial;
+   color: red;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: #4CAF50;
+   border-color: transparent transparent rgba(0, 200, 00, 10) transparent;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 7px;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div,.select-selected {
+  color: black;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 200, 00, 10) transparent;
+  cursor: pointer;
+  user-select: none;
+}
+
+/*style items (options):*/
+.select-items {
+ 
+  position: absolute;
+  background-color: white;
+  color:red;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(200, 255, 200, 0.8);
+
+}
+</style>
+
+
+
+</head>
+<body>
+    <br>
+  <br>
+  <br>
+  <br>
+<div class="container" style="background-color:white">
+<div class="row">
+    <div class="col-sm-4">
+     
+    </div>
+    <div class="col-sm-4">
+      <h3 class="center">Voting MV</h3>
+     
+    </div>
+       <div class="col-sm-2">
+     
+    </div>
+    <div class="col-sm-2">
+        <input class="buttonLogout" type="button" id="btnLogout" value="Logout" style="width:100%"> 
+ 
+    </div>
+  </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   
+
+  
+  <div class="row">
+    <div class="col-sm-3">
+     
+    </div>
+    <div class="col-sm-6" >
+          <div class="custom-select" style="width:100%;">
+            <select id="canID" >
+              <option id="c0" value="0">Select Candidate:</option>
+              <option id="c1" value="1"></option>
+              <option id="c2" value="2">BMW</option>
+             
+          
+            </select>
+          </div>
+   
+     
+    </div>
+    <div class="col-sm-3" >
+      
+    </div>
+  </div>
+ <br>
+ <div class="row">
+    <div class="col-sm-3">
+     
+    </div>
+    <div class="col-sm-6" >
+          
+       <label  id="lgmsg" >  </label>
+    </div>
+    <div class="col-sm-3" >
+      
+    </div>
+  </div>
+ <br>
+
+<div class="row" >
+    <div class="col-sm-5" >
+ 
+         
+    </div>
+    <div class="col-sm-2" >
+    
+
+  <input class="button button3" type="button" id="btnVoting" value="Vote" style="width:100%"> 
+ 
+    </div>
+    <div class="col-sm-5">
+      
+    </div>
+  </div>
+   <br>
+   <br>
+   <h4>Voting Results</h2>
+
+    <table  id="myTable">
+      <tr>
+        <th>Candidate ID</th>
+        <th>Name</th>
+        <th>Vote</th>
+      </tr>
+     
+    </table>
+   <br>
+
+  
+    
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+
+
+<script>
+
+</script>
+<script src="contract.js"></script> 
+<script src="voting.js"></script> 
+</body>
+</html>
