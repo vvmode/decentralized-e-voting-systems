@@ -1,0 +1,147 @@
+pragma solidity 0.4.25;
+
+contract Election{
+    
+    
+     uint256 private totalVotes;
+        uint256  deployementTime;
+        
+         uint256  startTime;
+          uint256  endTime;
+         
+        event test_value(uint256 indexed value1);
+        struct voter{
+            uint128 voterID;
+            uint128 voteCasted;    //true = summited vote, false = not submit yet
+        }
+        
+        struct candidate{
+            string name;
+            uint128 cID;
+            uint256 candidateTotalVotes;
+        }
+        
+        mapping (address => voter) private myVoter;
+        mapping (address => candidate) private myCandidate;
+   
+    
+     constructor () public {
+         deployementTime = block.timestamp;
+         
+        startTime = now;
+   endTime = ( startTime + 5 minutes );
+            totalVotes = 0;
+            setAllVoters();
+            setAllCandidates();
+            
+        }
+        
+
+       
+        function hasClosed() public view returns (bool) {
+  
+          return now > endTime;
+        }
+        
+        function getLogin(address _address) public view returns (bool) {
+            //   function getLogin() public view returns (int) {
+            
+           if(myVoter[_address].voteCasted ==1 || myVoter[_address].voteCasted ==2) {
+                
+           
+               return true;
+           }else{
+              return false;
+          }
+            
+        }
+        
+        
+        function CheckVoting(address _address)public view  returns (bool) {
+            if(myVoter[_address].voteCasted == 1) {
+             //   vote(1,0x2a1396d428116f91effb81909c0520fed5530aac);
+                 return false;
+            }
+            else {
+                return true;
+            }
+           
+        }
+    
+    
+
+   
+ function vote(uint128 id, address _address) public  {
+       if(hasClosed()==false){
+      bool temp=false;
+     // require (block.timestamp > endTime);
+       if(myCandidate[0xca35b7d915458ef540ade6068dfe2f44e8fa733c].cID==id){
+           
+            if(myVoter[_address].voteCasted == 1) {
+                totalVotes ++;
+                myCandidate[0xca35b7d915458ef540ade6068dfe2f44e8fa733c].candidateTotalVotes ++;
+                myVoter[_address].voteCasted = 2;
+                
+               
+            }
+       }
+       else if(myCandidate[0x14723a09acff6d2a60dcdf7aa4aff308fddc160c].cID==id){
+           
+            if(myVoter[_address].voteCasted == 1) {
+                totalVotes ++;
+                myCandidate[0x14723a09acff6d2a60dcdf7aa4aff308fddc160c].candidateTotalVotes ++;
+                myVoter[_address].voteCasted = 2;
+               
+            }
+       }
+       
+       }
+      
+   }
+        function getTotalCandidateVotes() public view returns (uint256, uint256) {
+            return (myCandidate[0xca35b7d915458ef540ade6068dfe2f44e8fa733c].candidateTotalVotes, myCandidate[0x14723a09acff6d2a60dcdf7aa4aff308fddc160c].candidateTotalVotes);
+        }
+           function setVoter(address _address,  uint128 _voterID ) public {
+            myVoter[_address].voterID = _voterID;
+            myVoter[_address].voteCasted = 1;
+            
+        }
+         function setAllVoters() private {
+            setVoter(0x0bd0d1bb55360d4a4ef2fd0ec373928d58aa20f9,  1); //voter1
+            setVoter(0x39ca5f9e1e5ff094ceb471f124bf7900c435acdd,  2); //voter2
+            setVoter(0x0b619bcd7f9c84487fd7f1f57267ffc214516f78,  3); //voter3
+             setVoter(0x5d3ef3ab466029f951b188c15f35b0e9441500bd, 4);
+               setVoter( 0x1648815270ab26bca90efaa845603bcf91832b6a,  5);
+          
+        }
+        
+       function  getCandidates() public view returns (bytes32[]) {
+           
+        bytes32[] memory result = new bytes32[](2);
+        
+            result[0] = "Mohame Abdulla";
+            result[1] = "Abdulla Hassan";
+        return result;
+    }
+       /*
+        
+        function addCandidate(string _name, uint128 _canID) public {
+            myCandidate[msg.sender].name = _name;
+            myCandidate[msg.sender].cID = _canID;
+            myCandidate[msg.sender].candidateTotalVotes = 0;
+        }
+        */
+        
+           function setCandidate(address _address, string _name, uint128 _canID) public {
+            myCandidate[_address].name = _name;
+            myCandidate[_address].cID = _canID;
+            myCandidate[_address].candidateTotalVotes = 0;
+        }
+        
+        function setAllCandidates() private {
+            setCandidate(0xca35b7d915458ef540ade6068dfe2f44e8fa733c, "Mohamed Abdulla", 1); //candidate1
+            setCandidate(0x14723a09acff6d2a60dcdf7aa4aff308fddc160c, "Abdulla Hassan", 2); //candidate2
+        }
+        
+}
+
